@@ -1,202 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PARA MI MEJOR AMIGA 💖</title>
-<style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    animation: fondo 6s ease-in-out infinite alternate;
-  }
-
-  @keyframes fondo {
-    0% { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
-    100% { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
-  }
-
-  .contenedor-principal {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .corazon {
-    width: 150px;
-    height: 150px;
-    background-color: red;
-    position: relative;
-    transform: rotate(-45deg);
-    animation: latir 1s infinite;
-  }
-
-  .corazon::before,
-  .corazon::after {
-    content: "";
-    width: 150px;
-    height: 150px;
-    background-color: red;
-    border-radius: 50%;
-    position: absolute;
-  }
-
-  .corazon::before { top: -75px; left: 0; }
-  .corazon::after { left: 75px; top: 0; }
-
-  @keyframes latir {
-    0%, 100% { transform: scale(1) rotate(-45deg); }
-    50% { transform: scale(1.2) rotate(-45deg); }
-  }
-
-  .foto-lado {
-    width: 140px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255, 0, 100, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: flotar 3s ease-in-out infinite alternate;
-  }
-
-  @keyframes flotar {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-  }
-
-  .foto-lado:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(255, 0, 150, 0.6);
-  }
-
-  .contenedor {
-    text-align: center;
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  }
-
-  input {
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    width: 80%;
-    text-align: center;
-    font-size: 16px;
-  }
-
-  button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #ff5e78;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  button:hover {
-    background-color: #ff2e63;
-  }
-
-  .oculto {
-    display: none;
-  }
-
-  .mensaje-final {
-    font-size: 1.3em;
-    font-weight: bold;
-    animation: aparecer 2s ease-in-out forwards;
-  }
-
-  @keyframes aparecer {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Para mi mejor amiga 💖</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="contenedor-principal">
-  <div class="corazon"></div>
-  <img src="imagenes/foto1.jpg" alt="Foto de amor" class="foto-lado">
-</div>
+<audio autoplay loop>
+  <source src="musica/fondo.mp3" type="audio/mpeg">
+</audio>
 
-<div class="contenedor" id="paso1">
-  <h2>💞 Si conoces a esta chica escribe su nombre 💞</h2>
-  <input type="text" id="nombre" placeholder="Escribe su nombre...">
-  <button onclick="verificarNombre()">Ingresar</button>
-</div>
+<!-- PANTALLA 1 -->
+<section class="pantalla activa" id="p1">
+  <h1>Para mi mejor amiga 💕</h1>
+  <img src="imagenes/foto1.jpg" class="foto">
+  <button onclick="siguiente()">Siguiente</button>
+</section>
 
-<div class="contenedor oculto" id="paso2">
-  <h2>💖 Necesito comprobar si de verdad eres tú 💖</h2>
-  <p>Escribe tu fecha favorita:</p>
-  <input type="text" id="fecha" placeholder="dd/mm/aaaa">
-  <button onclick="verificarFecha()">Siguiente</button>
-</div>
+<!-- PANTALLA 2 -->
+<section class="pantalla" id="p2">
+  <h2>¿Cuándo nos hicimos amigas? 🤔</h2>
+  <input type="text" id="fecha" placeholder="DD/MM/AAAA">
+  <button onclick="verificarFecha()">Confirmar</button>
+  <p id="error"></p>
+</section>
 
-<div class="contenedor oculto" id="paso3">
-  <h2>💕 Última pregunta... 💕</h2>
-  <p>¿Cómo te dice de cariño tu enamorado?</p>
-  <input type="text" id="apodo" placeholder="Tu apodo...">
-  <button onclick="verificarApodo()">Siguiente</button>
-</div>
+<!-- PANTALLA 3 -->
+<section class="pantalla" id="p3">
+  <h2>Tengo una carta para ti 💌</h2>
+  <button onclick="siguiente()">Abrir</button>
+</section>
 
-<div class="contenedor oculto" id="final">
-  <h2 class="mensaje-final">💝 Muy bien, has superado todas las pruebas 💝</h2>
-  <p>🎉 ¡Feliz cumpleaños, amorcito! 🎉</p>
-  <button onclick="irSiguiente()">Ir a la siguiente parte 💌</button>
-</div>
+<!-- PANTALLA 4 -->
+<section class="pantalla" id="p4">
+  <p class="carta">
+    Gracias por estar siempre conmigo, por las risas,
+    por los momentos difíciles y por ser quien eres 💖
+  </p>
+  <button onclick="siguiente()">Acompáñame a ver nuestros recuerdos</button>
+</section>
 
-<script>
-function verificarNombre() {
-  const nombre = document.getElementById('nombre').value.trim().toLowerCase();
-  if (nombre === 'miluska') {
-    document.getElementById('paso1').classList.add('oculto');
-    document.getElementById('paso2').classList.remove('oculto');
-  } else {
-    alert('❌ Nombre incorrecto, intenta de nuevo 💔');
-  }
-}
+<!-- PANTALLA 5 -->
+<section class="pantalla" id="p5">
+  <h2>Nuestros recuerdos 📸</h2>
 
-function verificarFecha() {
-  const fecha = document.getElementById('fecha').value.trim();
-  if (fecha === '23/05/2021') {
-    document.getElementById('paso2').classList.add('oculto');
-    document.getElementById('paso3').classList.remove('oculto');
-  } else {
-    alert('❌ Esa no es la fecha correcta 💔');
-  }
-}
+  <div class="galeria">
+    <div>
+      <img src="imagenes/foto2.jpg">
+      <p>Aquel día inolvidable 💫</p>
+    </div>
+    <div>
+      <img src="imagenes/foto3.jpg">
+      <p>Siempre juntas 💕</p>
+    </div>
+  </div>
 
-function verificarApodo() {
-  const apodo = document.getElementById('apodo').value.trim().toLowerCase();
-  if (apodo === 'gordita') {
-    document.getElementById('paso3').classList.add('oculto');
-    document.getElementById('final').classList.remove('oculto');
-  } else {
-    alert('❌ Mmm... no es como te dice 💔');
-  }
-}
+  <button onclick="siguiente()">Siguiente</button>
+</section>
 
-function irSiguiente() {
-  window.location.href = "imagenes.html";
-}
-</script>
+<!-- PANTALLA 6 -->
+<section class="pantalla" id="p6">
+  <h2>Un día como hoy 🎥</h2>
+  <video controls>
+    <source src="video/recuerdo.mp4" type="video/mp4">
+  </video>
+  <button onclick="siguiente()">Final</button>
+</section>
 
+<!-- PANTALLA 7 -->
+<section class="pantalla" id="p7">
+  <h1>🎉 FELIZ CUMPLEAÑOS 🎂</h1>
+  <p>Gracias por existir. Te quiero muchísimo 💖</p>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
 
