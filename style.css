@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(#ffb6c1, #ffe4e1);
+  text-align: center;
+  color: #333;
+}
+
+.pantalla {
+  display: none;
+  padding: 40px;
+}
+
+.activa {
+  display: block;
+}
+
+.foto {
+  width: 250px;
+  border-radius: 15px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  background: #ff69b4;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+}
+
+#error {
+  color: red;
+}
+
+.galeria img {
+  width: 200px;
+  border-radius: 10px;
+}
+
+.carta {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
