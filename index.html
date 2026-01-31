@@ -7,7 +7,7 @@
 <style>
 *{
     box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI',sans-serif;
 }
 
 body{
@@ -76,7 +76,7 @@ button:hover{
 
 .recuerdos{
     display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
     gap:15px;
 }
 
@@ -103,11 +103,12 @@ button:hover{
 
 <body>
 
-<audio autoplay loop>
+<!-- 🎵 MÚSICA (arranca cuando la fecha es correcta) -->
+<audio id="musica" loop>
     <source src="musica/fondo.mp3" type="audio/mpeg">
 </audio>
 
-<!-- SECCION 1 -->
+<!-- SECCIÓN 1 -->
 <div class="section active" id="s1">
     <div class="recuadro">
         <img src="imagenes/foto1.jpg">
@@ -121,16 +122,16 @@ button:hover{
     </div>
 </div>
 
-<!-- SECCION 2 -->
+<!-- SECCIÓN 2 -->
 <div class="section" id="s2">
     <div class="carta">
         <h2>💌 Para ti</h2>
         <p>Hay recuerdos que nunca se borran...</p>
-        <button onclick="abrirCarta()">Abrir</button>
+        <button onclick="cambiar('s2','s3')">Abrir</button>
     </div>
 </div>
 
-<!-- SECCION 3 -->
+<!-- SECCIÓN 3 -->
 <div class="section" id="s3">
     <h2>Nuestros recuerdos 📸</h2>
 
@@ -147,10 +148,10 @@ button:hover{
         <source src="video/recuerdo.mp4" type="video/mp4">
     </video>
 
-    <button onclick="final()">Siguiente</button>
+    <button onclick="cambiar('s3','s4')">Siguiente</button>
 </div>
 
-<!-- SECCION FINAL -->
+<!-- SECCIÓN FINAL -->
 <div class="section" id="s4">
     <h1 class="distorsion">🎉 Feliz Cumpleaños 🎉</h1>
     <h2>Que Dios te bendiga siempre 💖</h2>
@@ -160,10 +161,12 @@ button:hover{
 let errores = 0;
 
 function validarFecha(){
-    let f = document.getElementById("fecha").value;
-    let msg = document.getElementById("msg");
+    const f = document.getElementById("fecha").value;
+    const msg = document.getElementById("msg");
 
     if(f === "14/04/2017"){
+        // 🎵 AQUÍ ARRANCA LA MÚSICA (interacción válida)
+        document.getElementById("musica").play();
         cambiar("s1","s2");
     }else{
         errores++;
@@ -175,14 +178,6 @@ function validarFecha(){
     }
 }
 
-function abrirCarta(){
-    cambiar("s2","s3");
-}
-
-function final(){
-    cambiar("s3","s4");
-}
-
 function cambiar(a,b){
     document.getElementById(a).classList.remove("active");
     document.getElementById(b).classList.add("active");
@@ -191,3 +186,4 @@ function cambiar(a,b){
 
 </body>
 </html>
+
