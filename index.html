@@ -273,12 +273,17 @@ function validarFecha(){
         cambiar("s2","s3");
     }else{
         errores++;
-        msg.innerText = errores === 1
-            ? "Mmmmm ese no es srta 😏"
-            : "No vale buscar 😏";
-            : "Tan rápido te olvidaste 😒";
-            : "Es es enserio que no recuerdas 😒";
-            : "Ya bueno como no recuerdas te dejo buscar";
+       if(errores === 1){
+            msg.innerText = "Mmmmm ese no es srta 😏";
+        }else if(errores === 2){
+            msg.innerText = "No vale buscar 😏";
+        }else if(errores === 3){
+            msg.innerText = "Tan rápido te olvidaste 😒";
+        }else if(errores === 4){
+            msg.innerText = "¿Es en serio que no recuerdas? 😒";
+        }else{
+            msg.innerText = "Ya bueno… te dejo buscar 😅";
+        }
     }
 }
 
@@ -301,6 +306,7 @@ function salir(){
 
 </body>
 </html>
+
 
 
 
